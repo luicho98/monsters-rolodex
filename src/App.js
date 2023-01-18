@@ -1,48 +1,10 @@
-//import { Component } from 'react';
-import { useState, useEffect} from 'react';
+import { Component } from 'react';
 
 //import logo from './logo.svg';
 import CardList from './components/card-list/card-list.component';
 import SearchBox from './components/search-box/search-box.component';
 import './App.css';
 
-const App = () =>{
-  const [searchField, setSearchField] = useState(''); //[value, setValue]
-  const [monsters, setMonsters] = useState([]);
-  const [filteredMonsters, setfilteredMonsters] = useState(monsters);
-
-  console.log('render');
-
-  useEffect(() =>{
-    fetch('https://jsonplaceholder.typicode.com/users')
-    .then((response) =>response.json())
-    .then((users) => setMonsters(users));
-  }, []);
-  //the () its to clarify that nothing its gonna change later that will invoke the fetch again
-
-  useEffect(() =>{
-    const newFilteredMonsters = monsters.filter((monster) => {
-      return monster.name.toLocaleLowerCase().includes(searchField);
-    });
-
-    setfilteredMonsters(newFilteredMonsters);
-  }, [monsters, searchField]);
-
-  const onSearchChange = (event) => {
-    const searchFieldString = event.target.value.toLocaleLowerCase();
-    setSearchField(searchFieldString);
-  }
-
-  return(
-    <div className="App">
-        <h1 className='app-tittle'>Monsters Rolodex</h1>
-        <SearchBox onChangeHandler={onSearchChange} placeholder='search monsters' className='search-box' />
-        <CardList monsters={filteredMonsters} />
-      </div>
-  );
-}
-
-/*
 class App extends Component {
   constructor(){
     super();
@@ -91,5 +53,5 @@ class App extends Component {
     );
   }
   }
-*/
+
 export default App;
